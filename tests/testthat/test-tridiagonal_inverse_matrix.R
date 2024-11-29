@@ -1,3 +1,4 @@
+library(TVDPathAlgo)
 test_that("tridiagonal_inverse_matrix computes the same result as solve()", {
   # Helper function to create a random tridiagonal matrix
   create_tridiagonal_matrix <- function(n, main_diag, sub_diag, super_diag) {

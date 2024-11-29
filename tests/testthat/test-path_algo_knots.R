@@ -1,3 +1,4 @@
+library(TVDPathAlgo)
 test_that("Knots for lambda_test are consistent with path_algo output", {
   # Input signal
   y <- c(1, 3, 4, 6, 8, 6)

@@ -1,3 +1,4 @@
+library(TVDPathAlgo)
 test_that("path_algo handles invalid inputs and errors correctly", {
   # Test 1: y is empty
   expect_error(

@@ -1,3 +1,4 @@
+library(TVDPathAlgo)
 test_that("find_next_lambda and find_next_lambda_tri return the same results", {
   # Input signal and parameters
   y <- c(1, 3, 4, 6, 8, 6)
