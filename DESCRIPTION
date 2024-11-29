@@ -1,0 +1,24 @@
+Package: TVDPathAlgo
+Title: Path-Following Algorithm for Total Variation Denoising
+Version: 0.0.1
+Authors@R: 
+    person("Xuan", "Li", email = "1208039950@qq.com", role = c("aut", "cre"),
+           comment = c(ORCID = "YOUR-ORCID-ID"))
+Description: 
+    The `TVDPathAlgo` package implements a path-following algorithm for solving 
+    Total Variation Denoising (TVD) problems. It efficiently computes solutions for 
+    a sequence of regularization parameters (`lambda`) while tracking the knots 
+    (change points) in the resulting piecewise constant solution. The package 
+    provides tools for both algorithmic exploration and testing of intermediate 
+    solutions.
+License: MIT + file LICENSE
+Encoding: UTF-8
+Roxygen: list(markdown = TRUE)
+RoxygenNote: 7.3.2
+Imports: 
+    tvdenoising
+Remotes:
+    glmgen/tvdenoising
+Suggests: 
+    testthat (>= 3.0.0)
+Config/testthat/edition: 3
