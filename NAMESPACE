@@ -3,5 +3,6 @@
 export(find_next_lambda)
 export(find_next_lambda_tri)
 export(path_algo)
+export(solutions_cost)
 export(tridiagonal_inverse_matrix)
 importFrom(tvdenoising,tvdenoising)
