@@ -45,14 +45,41 @@ library(TVDPathAlgo)
 y <- c(1, 3, 4, 6, 8, 6)
 
 # Solve using the path-following algorithm
-result <- path_algo(y, lambda_0 = 100, method = "tri")
+result <- path_algo(y, method = "tri")
 
 # View results
 print(result$lambda_values)      # Sequence of lambda values
+print(result$beta_values)        # Sequence of beta solutions for each lambda
 print(result$knot_locations)     # Knot locations for each lambda
 
 ```
 
+You can plot the original signal and the denoised solutions:
+```{r plot}
+# Extract beta solutions as a matrix
+beta_matrix <- do.call(cbind, result$beta_values)
+
+# Set up colors with transparency
+n_lambda <- length(result$lambda_values)
+colors <- sapply(rainbow(n_lambda), function(col) adjustcolor(col, alpha.f = 0.4)) # 40% transparency
+
+# Plot original signal
+plot(y, type = "o", col = "black", pch = 16, lwd = 2, 
+     ylim = range(c(y, beta_matrix)), xlab = "Index", ylab = "Value", 
+     main = "Original Signal and Denoised Solutions")
+lines(y, col = "black", lwd = 2)
+
+# Add beta solutions with transparency
+for (i in 1:n_lambda) {
+  lines(beta_matrix[, i], col = colors[i], lwd = 2)
+}
+
+# Add legend at the bottom right
+legend("bottomright", 
+       legend = c("Original Signal", paste("Beta (lambda=", round(result$lambda_values, 2), ")", sep = "")),
+       col = c("black", colors), lwd = 2, cex = 0.8)
+
+```
 ## Functions
 
 ### `path_algo`

@@ -39,11 +39,29 @@ library(TVDPathAlgo)
 y <- c(1, 3, 4, 6, 8, 6)
 
 # Solve using the path-following algorithm
-result <- path_algo(y, lambda_0 = 100, method = "tri")
+result <- path_algo(y, method = "tri")
 
 # View results
 print(result$lambda_values)      # Sequence of lambda values
-#> [1] 100.0000000   3.0000000   2.5000000   2.0000000   0.6666667   0.0000000
+#> [1] 800.0000000   3.0000000   2.5000000   2.0000000   0.6666667   0.0000000
+print(result$beta_values)        # Sequence of beta solutions for each lambda
+#> [[1]]
+#> [1] 4.666667 4.666667 4.666667 4.666667 4.666667 4.666667
+#> 
+#> [[2]]
+#> [1] 3.500000 3.500000 4.000000 5.666667 5.666667 5.666667
+#> 
+#> [[3]]
+#> [1] 3.250000 3.250000 4.000000 5.833333 5.833333 5.833333
+#> 
+#> [[4]]
+#> [1] 3 3 4 6 6 6
+#> 
+#> [[5]]
+#> [1] 1.666667 3.000000 4.000000 6.000000 6.666667 6.666667
+#> 
+#> [[6]]
+#> [1] 1 3 4 6 8 6
 print(result$knot_locations)     # Knot locations for each lambda
 #> [[1]]
 #> [1] 0
@@ -64,7 +82,34 @@ print(result$knot_locations)     # Knot locations for each lambda
 #> [1] 2 3 4 5 6
 ```
 
-## Functions
+You can plot the original signal and the denoised solutions:
+
+``` r
+# Extract beta solutions as a matrix
+beta_matrix <- do.call(cbind, result$beta_values)
+
+# Set up colors with transparency
+n_lambda <- length(result$lambda_values)
+colors <- sapply(rainbow(n_lambda), function(col) adjustcolor(col, alpha.f = 0.4)) # 40% transparency
+
+# Plot original signal
+plot(y, type = "o", col = "black", pch = 16, lwd = 2, 
+     ylim = range(c(y, beta_matrix)), xlab = "Index", ylab = "Value", 
+     main = "Original Signal and Denoised Solutions")
+lines(y, col = "black", lwd = 2)
+
+# Add beta solutions with transparency
+for (i in 1:n_lambda) {
+  lines(beta_matrix[, i], col = colors[i], lwd = 2)
+}
+
+# Add legend at the bottom right
+legend("bottomright", 
+       legend = c("Original Signal", paste("Beta (lambda=", round(result$lambda_values, 2), ")", sep = "")),
+       col = c("black", colors), lwd = 2, cex = 0.8)
+```
+
+<img src="man/figures/README-plot-1.png" width="100%" /> \## Functions
 
 ### `path_algo`
 
