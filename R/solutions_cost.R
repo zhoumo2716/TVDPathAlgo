@@ -24,7 +24,7 @@
 #' # Example usage with dummy data
 #' y <- c(1, 2, 3, 4)
 #' result <- path_algo(y, lambda_0 = 100, method = "tri")
-#' ranked_results <- rank_solutions_by_cost(result, y, alpha = 0.5)
+#' ranked_results <- solutions_cost(result, y, alpha = 0.5)
 #' print(ranked_results)
 #'
 #' @export

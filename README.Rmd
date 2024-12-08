@@ -153,6 +153,22 @@ A data frame containing:
 - `total_cost`: Weighted sum of noise reduction and signal preservation.  
 - `rank`: Rank of each solution based on total cost (1 = best).  
 
+
+
+### `test_beta_linear_combination`
+
+**Description**: Verifies the accuracy of constructing intermediate solutions (\( \beta_{\lambda} \)) for a given lambda value using a weighted linear combination of bounding solutions (\( \beta_{\lambda_k} \) and \( \beta_{\lambda_{k+1}} \)). 
+
+**Arguments**:  
+- `result`: A list returned by the `path_algo` function, containing `lambda_values`, `beta_values`, and related outputs.  
+- `lambda_test`: A numeric value specifying the intermediate lambda value to test.  
+- `y`: A numeric vector representing the original noisy signal.  
+
+**Returns**:  
+A logical value (`TRUE`/`FALSE`) indicating whether the test passed.  
+- `TRUE`: The objective values of the interpolated and actual solutions differ by less than the specified tolerance (\(1 \times 10^{-6}\)).  
+- `FALSE`: The objective values differ significantly, suggesting the test failed.  
+
 **Example Usage**:  
 
 ```{r}
@@ -168,4 +184,14 @@ ranked_results <- solutions_cost(result, y, alpha = 0.5)
 
 # Print ranked results
 print(ranked_results)
+```
+
+**Example Usage**:
+
+```{r}
+library(TVDPathAlgo)
+y <- c(1, 3, 4, 6, 8, 6)
+result <- path_algo(y, method = "tri")
+lambda_test <- (result$lambda_values[2] + result$lambda_values[3]) / 2
+test_beta_linear_combination(result, lambda_test, y)
 ```
