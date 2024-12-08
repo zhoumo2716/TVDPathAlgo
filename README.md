@@ -196,27 +196,6 @@ successive entries of $`\beta`$.
 preservation.  
 - `rank`: Rank of each solution based on total cost (1 = best).
 
-### `test_beta_linear_combination`
-
-**Description**: Verifies the accuracy of constructing intermediate
-solutions ($`\beta_{\lambda}`$) for a given lambda value using a
-weighted linear combination of bounding solutions ($`\beta_{\lambda_k}`$
-and $`\beta_{\lambda_{k+1}}`$).
-
-**Arguments**:  
-- `result`: A list returned by the `path_algo` function, containing
-`lambda_values`, `beta_values`, and related outputs.  
-- `lambda_test`: A numeric value specifying the intermediate lambda
-value to test.  
-- `y`: A numeric vector representing the original noisy signal.
-
-**Returns**:  
-A logical value (`TRUE`/`FALSE`) indicating whether the test passed.  
-- `TRUE`: The objective values of the interpolated and actual solutions
-differ by less than the specified tolerance ($`1 \times 10^{-6}`$).  
-- `FALSE`: The objective values differ significantly, suggesting the
-test failed.
-
 **Example Usage**:
 
 ``` r
@@ -237,6 +216,27 @@ print(ranked_results)
 #> 3      0            0.00           1.0000000  0.5000000    2
 #> 1    100            1.25           0.0000000  0.6250000    3
 ```
+
+### `test_beta_linear_combination`
+
+**Description**: Verifies the accuracy of constructing intermediate
+solutions ($`\beta_{\lambda}`$) for a given lambda value using a
+weighted linear combination of bounding solutions ($`\beta_{\lambda_k}`$
+and $`\beta_{\lambda_{k+1}}`$).
+
+**Arguments**:  
+- `result`: A list returned by the `path_algo` function, containing
+`lambda_values`, `beta_values`, and related outputs.  
+- `lambda_test`: A numeric value specifying the intermediate lambda
+value to test.  
+- `y`: A numeric vector representing the original noisy signal.
+
+**Returns**:  
+A logical value (`TRUE`/`FALSE`) indicating whether the test passed.  
+- `TRUE`: The objective values of the interpolated and actual solutions
+differ by less than the specified tolerance ($`1 \times 10^{-6}`$).  
+- `FALSE`: The objective values differ significantly, suggesting the
+test failed.
 
 **Example Usage**:
 

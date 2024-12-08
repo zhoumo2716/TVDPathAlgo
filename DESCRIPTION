@@ -1,6 +1,6 @@
 Package: TVDPathAlgo
 Title: Path-Following Algorithm for Total Variation Denoising
-Version: 1.0.1
+Version: 1.0.2
 Authors@R: 
     person("Xuan", "Li", email = "1208039950@qq.com", role = c("aut", "cre"),
            comment = c(ORCID = "YOUR-ORCID-ID"))
